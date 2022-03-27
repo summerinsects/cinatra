@@ -41,3 +41,7 @@ cmake-build-debug
 .settings
 
 /example/build/
+.vs
+**.sln
+**.user
+x64
