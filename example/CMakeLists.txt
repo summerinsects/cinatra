@@ -8,6 +8,17 @@ else ()
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -pthread -msse4.2 -std=c++20")
 endif ()
 
+# Update submodules as needed
+execute_process(COMMAND git submodule update --init
+                WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+                RESULT_VARIABLE EXIT_CODE)
+if(NOT EXIT_CODE EQUAL 0)
+	message(FATAL_ERROR "Updating submodules within ${PROJECT_SOURCE_DIR} failed.")
+else()
+	message(STATUS "Get submodule asio ok")
+	include_directories(../thirdparty/async_simple/demo_example/asio)
+endif()
+
 #option(ENABLE_SSL   "Set to switch to build use ssl"  OFF)
 #option(ENABLE_GZIP  "Set to switch to build use gzip" OFF)
 SET(ENABLE_GZIP OFF)
